@@ -27,8 +27,7 @@ public class Entity {
     }
 
     public void receiveDamage(int damage) {
-        if (defence > damage) {
-            health = 0;
+        if (this.defence > damage) {
             return;
         }
         health -= damage - defence;

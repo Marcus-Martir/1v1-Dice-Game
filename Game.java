@@ -12,6 +12,7 @@ public class Game {
             if (!p1.alive()) {
                 break;
             }
+            p1.addPoints(5);
             System.out.println("You won!!!");
             match++;
             if (match % 3 == 0) {

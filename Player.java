@@ -3,10 +3,11 @@ import java.util.Scanner;
 
 public class Player extends Entity {
     private Scanner input;
-
+    private int points;
 
     public Player(int numberOfPowers) {
         this.entityType = "You";
+        this.points = 0;
         this.numberOfPowers = numberOfPowers;
     }
 
@@ -34,7 +35,7 @@ public class Player extends Entity {
             if (index == attack) {
                 System.out.println("You rolled a " + attack + ", which is the same number you rolled before!");
                 System.out.println("You will attack with your super power!");
-                attack = 30;
+                attack = 70;
             } else {
                 System.out.println("You rolled a " + attack + ", so you will attack with that much.");
             }
@@ -51,7 +52,7 @@ public class Player extends Entity {
                 System.out.println("You used " + power + " against " + opponent.getName());
             }
             opponent.receiveDamage(attack);
-            System.out.println(opponent.getName() + " now has " + opponent.getHealth() + " health");
+            System.out.println(opponent.getName() + " now has " + (opponent.getHealth() > 0 ? opponent.getHealth() : 0) + " health");
             if (!opponent.alive()) {
                 break;
             }
@@ -62,7 +63,7 @@ public class Player extends Entity {
             int oppAttack = (int) (Math.random() * 4) + 3;
             if (oppIndex == oppAttack) {
                 System.out.println("Your opponent rolled doubles!! Which means they'll get to use their super power...");
-                oppAttack = 30;
+                oppAttack = 70;
             } else {
                 System.out.println("Your opponent rolled. And will use \""+ oppPower + "\"" + " with " + oppAttack + " attack power...");
             }
@@ -75,9 +76,9 @@ public class Player extends Entity {
             System.out.println("\nDEFEND!!!\n");
             this.receiveDamage(oppAttack);
             if (oppIndex == oppAttack) {
-                System.out.println(opponent.getName() + " used " + opponent.superPower + " and now you are left with " + this.health + " health");
+                System.out.println(opponent.getName() + " used " + opponent.superPower + " and now you are left with " + (this.health > 0 ? this.health : 0) + " health");
             } else {
-                System.out.println(opponent.getName() + " used " + oppPower + " and now you are left with " + this.health + " health");
+                System.out.println(opponent.getName() + " used " + oppPower + " and now you are left with " + (this.health > 0 ? this.health : 0) + " health");
             }
             if (!this.alive()) {
                 break;
@@ -126,6 +127,10 @@ public class Player extends Entity {
 
     public void closeInput() {
         this.input.close();
+    }
+
+    public void addPoints(int amount) {
+        this.points += amount;
     }
 
 }
