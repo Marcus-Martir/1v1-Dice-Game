@@ -15,11 +15,22 @@ public class Entity {
 
     public Entity() {
         this.health = 100;
+        this.powers = new ArrayList<String>();
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
+    }
+
+    public int getHealth() {
+        return this.health;
     }
 
     public void receiveDamage(int damage) {
-        if (defence > damage)
-            return; // no damage dealt because defence was greater
+        if (defence > damage) {
+            health = 0;
+            return;
+        }
         health -= damage - defence;
     }
     
@@ -54,5 +65,13 @@ public class Entity {
 
     public String toString() {
         return getInfoCard();
+    }
+
+    public String getStats() {
+        return "";
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
